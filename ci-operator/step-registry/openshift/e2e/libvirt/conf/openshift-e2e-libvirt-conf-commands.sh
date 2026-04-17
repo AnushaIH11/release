@@ -8,7 +8,6 @@ echo "TEST_TYPE=${TEST_TYPE}"
 echo "BRANCH=${BRANCH}"
 echo "ARCH=${ARCH}"
 
-
 # List of exclude tests from conformance/serial suite
 if [ "${TEST_TYPE}" == "conformance-serial" ]; then
     cat > "${SHARED_DIR}/excluded_tests" << EOF
