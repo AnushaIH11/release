@@ -8,6 +8,7 @@ echo "TEST_TYPE=${TEST_TYPE}"
 echo "BRANCH=${BRANCH}"
 echo "ARCH=${ARCH}"
 
+sleep 10
 
 # List of exclude tests from conformance/serial suite
 if [ "${TEST_TYPE}" == "conformance-serial" ]; then
@@ -278,6 +279,8 @@ EOF
 
 # Excluding few loadbalancer tests with UDP from 4.13 and above Libvirt and PowerVS ppc64le jobs since power environment does not currently support loadbalancing UDP traffic
 elif echo ${BRANCH} | awk -F. '{ if ((($1 == "main") || ($1 == "master")) || (($1 == 4) && ($2 >= 13))) { exit 0 } else { exit 1 } }' && [ "${ARCH}" == "ppc64le" ]; then
+    echo "DEBUG: ppc64le branch logic triggered"
+    sleep 10
     cat > "${SHARED_DIR}/excluded_tests" << EOF
 "[sig-apps] StatefulSet Basic StatefulSet functionality [StatefulSetBasic] should perform rolling updates and roll backs of template modifications with PVCs [Suite:openshift/conformance/parallel] [Suite:k8s]"
 "[sig-apps] StatefulSet Basic StatefulSet functionality [StatefulSetBasic] should perform rolling updates and roll backs of template modifications with PVCs"
